@@ -1,0 +1,52 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 서버 접속 후 배포
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: 52.78.194.14
+          username: ubuntu
+          key: |
+            -----BEGIN RSA PRIVATE KEY-----
+            MIIEpAIBAAKCAQEAt8uyzdCd9q33qc441LWkZKeeuysp29rSiY6yT/A8TP3T9au3
+            WKJ2yN5w+5nMz23V2lEVYZGM8U+YGw5QPOPBzaKDn6+9mFFSck8vAARIGlYlZn7Y
+            zsWgADDiGP9pvSj39OddN0QCZVX2e+mfCSVfFQD37VK7Mxu/ZzMkJ4K1oc4asuk0
+            8b8hjs0VRZOpjgm/15N5SOxhlZ0Of0r/W9LaoCJn/5gBKFI8bF//b2juSEmhpApn
+            CaIF1ZBNX7+G9N/RI+NWw3INqk0aJQOduF1Xc+wzCYyz09ioztwbzlwJJt49Qm07
+            hlkECqO3epH7SLVbiEqS/tmlBdCtwxO3E4oKgQIDAQABAoIBAEpUTtN9cuS4Jli9
+            1a3wZ7NtNnxrUFphfJO06df6R+i7HmVUNKnbyj4h939JC9M3kCzibcsvmdhdYB5R
+            A5IcadxHxQNnhz16ZeVksJVJJf/Apw90bSnyMmrhWg7R/GlLkDuy9bfMAUwKH8yt
+            BmwkePd9lMadlqdsqVOLEywHaH0utMJ68NNgXul9qdoXEOqoQEYQZv99jYCLyTtl
+            u8PQF9CBJjDbWkwR0IVnN/oO3F/XTbLdEVDoNl9zo93hq+4lzmu2NN8hzqMD43b6
+            OvlhhLzEJJgJjf0GXKKjhgdGDOH7ilB82IJVNFFnaDi1g3yzbXwFzYr3hdIXPtaZ
+            hS1/AAECgYEA70SXUj6GokaK4fXW7C1nByU5y8l1KfKEcLDA5WZnPwDIoC4fm+U3
+            MmX0O8le7ndni0YoX8mX5IYZ81pXQ3tdUx/c2d9j8wQY9HWhZpti9gf3gEVGVvh/
+            Kyy6Afl1CKzCvSDS1Al+vK50BOxXaa76vzyitslyof3JRROpf38+KoECgYEAxKYJ
+            EGI6j7kbnBgECDydq6dy0b09I2kNjKkSpeHVW3tBc+HWP/IV5RjQZZjWPhv0lDiI
+            vVIu/tnCMzdZLZvNK2XiKiivUE5mKA2FvcMlNQHakUSQLQoiTY+WJ/H+h4wHwTtr
+            fawqMLuoYTAOj5HvXaI+wYrkkffAxiCJZfOb4AECgYAHJCDwD3WtOjXC8LdtbR16
+            FR5YerbIfbh+NIhNUHUcaEWUokvHN1wiYPCdKDFxJJcujPV/hmDGLUpw/O1F0lTC
+            uly5E/XDtweXpDsg+NpHRY2ZgnfK+Ley7i7PCEb5704Qnv4r3eyubPaBfxxMxzAs
+            rP6ePfzx4MU1DpUsfPu6AQKBgQC8kKXiYv7asFqsTE8Zgt6CKjgsrLTCjsriVYG/
+            NRV8+mzh7O2gNcgO/cNfmLXfqrjVpHxiZjsQP8k7iVhnJp4Pfkvnt0mczQCiaY0U
+            UNsNwDBQ2hkSR0RrcUNAHInAemM5RHwnbv6p6lhkkUt1GjAYbiqVNlVFLvhYQ/zc
+            mUOgAQKBgQDZoJ2iRGloLRMm/qqHfz0JRGO3Ta19D0hrXKh5MA09hFrFDWTl5wCL
+            GqvEuNswOqi/0Id+vwC6Vjb4xDqyJz6SYEU0WvKGhhGz53xR61YVEW9mGqoUpoqW
+            txHCQFJq+jsA64TI12aWUVkdPKKQMdXsbnBXhTWFt47iDYOP9r33cw==
+            -----END RSA PRIVATE KEY-----
+
+          script: |
+            cd ~/backend
+            git pull origin dev
+            npm install
+            npm run build
+            pm2 restart app
