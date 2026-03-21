@@ -15,7 +15,7 @@ jobs:
         with:
           host: 52.78.194.14
           username: ubuntu
-          key:
+          key: |
             -----BEGIN RSA PRIVATE KEY-----
             MIIEpAIBAAKCAQEAt8uyzdCd9q33qc441LWkZKeeuysp29rSiY6yT/A8TP3T9au3
             WKJ2yN5w+5nMz23V2lEVYZGM8U+YGw5QPOPBzaKDn6+9mFFSck8vAARIGlYlZn7Y
