@@ -19,7 +19,9 @@ jobs:
 
           script: |
             cd ~/backend
-            git pull origin dev
-            npm install
+            git fetch origin
+            git reset --hard origin/dev
+            git clean -fd
+            npm ci
             npm run build
-            pm2 restart app
+            pm2 restart app || pm2 start dist/main.js --name app
