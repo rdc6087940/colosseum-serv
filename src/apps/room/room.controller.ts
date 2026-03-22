@@ -32,4 +32,11 @@ export class RoomController {
   findOne(@Param('id') id: string) {
     return this.roomService.findOne(+id);
   }
+
+  @ApiOperation({ summary: '채팅방 찾기 3' })
+  @Get(':idd')
+  @Public()
+  findOnes(@Param('idd') idd: string) {
+    return this.roomService.findOne(+idd);
+  }
 }
