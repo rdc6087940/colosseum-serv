@@ -1,6 +1,7 @@
 import { BadRequestException } from '@nestjs/common';
 import {
   Brackets,
+  Repository,
   SelectQueryBuilder,
   getConnection,
   getRepository,
@@ -12,12 +13,12 @@ export const pagenateQuery = async (
   entity: any,
   table_name: string,
   dto: PaginatedDto,
+  repo: Repository<any>,
 ) => {
   let keyword = dto.keywords;
   let sort = dto.sorts;
 
-  const repository = getRepository(entity);
-  let queryBuilder = repository.createQueryBuilder(table_name);
+  let queryBuilder = repo.createQueryBuilder(table_name);
 
   // keyword
   queryBuilder = await keywordingQuery(

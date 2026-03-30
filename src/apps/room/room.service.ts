@@ -15,7 +15,7 @@ export class RoomService {
   }
 
   async getRooms(dto: PaginatedDto) {
-    const query = await pagenateQuery(Room, 'room', dto);
+    const query = await pagenateQuery(Room, 'room', dto, this.repo);
     const response = await getPagingInfo(query, dto.page, dto.limit, dto.sorts);
     response.response.result = await response.queryBuilder.getMany();
     return response.response;
@@ -49,9 +49,6 @@ export class RoomService {
       .delete()
       .where(`id=:id`, { id: id })
       .execute();
-    // const target: Banner = await this.repo.findOne(id);
-    // const object = { ...target, is_enabled: false };
-    // const result = await this.repo.save(object);
     if (!result) return true;
     return false;
   }

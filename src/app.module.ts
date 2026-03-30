@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RoomModule } from './apps/room/room.module';
 import { AppsMeta } from './apps/app.meta';
+import { RoomChatModule } from './apps/room-chat/room-chat.module';
+import { RoomGptLogModule } from './apps/room-gpt-log/room-gpt-log.module';
 
 @Module({
   imports: [
@@ -19,6 +21,8 @@ import { AppsMeta } from './apps/app.meta';
       logging: true,
     }),
     RoomModule,
+    RoomChatModule,
+    RoomGptLogModule,
   ],
   controllers: [AppController],
   providers: [AppService],
