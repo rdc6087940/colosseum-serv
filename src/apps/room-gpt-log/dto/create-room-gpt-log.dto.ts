@@ -13,7 +13,7 @@ export class CreateRoomGptLogDto {
   @IsString()
   status: string;
 
-  @ApiProperty({ title: '응답결과 텍스트', example: 'GTEXT' })
+  @ApiProperty({ title: '응답결과 텍스트 테스트', example: 'GTEXT' })
   @IsString()
   gtext: string;
 
